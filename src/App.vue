@@ -12,5 +12,16 @@ export default {
   data: () => ({
     //
   }),
+  beforeCreate() {
+    this.$router.push({name:'form',params: {step: '1'}})
+  }
 };
 </script>
+
+<style lang="scss">
+#app{
+  font-family: 'Ubuntu', sans-serif !important;
+  background-color: #EEF4FB;
+}
+</style>
+
