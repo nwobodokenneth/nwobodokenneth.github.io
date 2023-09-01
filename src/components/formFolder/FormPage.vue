@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh;   position: relative;">
-    <div class="mobile__view_top">
+    <div class="mobile__view_top tw-block md:tw-hidden">
       <FormStepper :current-step="step" :steps="stepsTitle"/>
     </div>
     <div class="tw-flex md:tw-items-center md:tw-h-full tw-justify-center tw--mt-24 md:tw--mt-0">

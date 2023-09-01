@@ -1,5 +1,6 @@
 <template>
   <div style="height: 330px">
+    <div style="color: #ED3548" v-if="error">{{error}}</div>
     <div class="md:tw-flex tw-gap-5 md:tw-justify-between">
       <div v-for="item in selectData" :key="item.price">
         <SelectPlanCard @selected-plan="sendPlan" :selected="getPlanDetails.title" :item="item"/>
@@ -35,6 +36,8 @@ export default {
     return {
       toggleDuration: false,
       toggleValue: 'mo',
+      error:'',
+
       selectData:[
         {title: 'Arcade', image: arcadeIcon, price:9, duration:'mo'},
         {title: 'Advanced', image: advancedIcon, price:12, duration:'mo'},
@@ -45,6 +48,19 @@ export default {
   },
   computed:{
     ...mapGetters('form', ['getSelectedAddOns', 'getPlanDetails'])
+  },
+  watch: {
+    error: {
+      handler: function(search) {
+        if(search){
+          setTimeout(()=> {
+            this.error = ''
+          }, 3000)
+        }
+      },
+      deep: true,
+      immediate: true
+    }
   },
   methods:{
     ...mapMutations('form',['setPlanDetails', 'setSelectedAddOns']),
@@ -57,11 +73,16 @@ export default {
       eventBus.$emit('clearPlans')
     },
     handleNext(){
-      let step = this.$route.params.step
-      let newStep = parseInt(step)
-      console.log(newStep)
-      if(step < 3){
-        this.$router.push({params: {step: `${newStep + 1}`}})
+      if(Object.keys(this.getPlanDetails).length === 0){
+        this.error = 'Please select a plan'
+        return
+      }else {
+        let step = this.$route.params.step
+        let newStep = parseInt(step)
+        console.log(newStep)
+        if(step < 3){
+          this.$router.push({params: {step: `${newStep + 1}`}})
+        }
       }
     },
     chooseMonth(e){
@@ -86,7 +107,6 @@ export default {
   mounted() {
     // adding eventBus listener
     eventBus.$on('Select', () => {
-      console.log('next')
       this.handleNext()
 
     })

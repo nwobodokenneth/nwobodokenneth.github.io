@@ -51,6 +51,9 @@ export default {
 sec_title{
   width: 120px
 }
+.title{
+  width: 9vw;
+}
 
 @media (max-width: 768px){
   .title{

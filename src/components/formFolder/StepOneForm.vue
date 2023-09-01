@@ -67,21 +67,17 @@ export default {
           item.error = 'valid email'
         }
       })
-      // if(this.checkValue()){
-      //   return
-      // }else {
-      //
-      //   let step = this.$route.params.step
-      //   let newStep = parseInt(step)
-      //   if(step < 4){
-      //     this.$router.push({params: {step: `${newStep + 1}`}})
-      //   }
-      // }
-      let step = this.$route.params.step
-      let newStep = parseInt(step)
-      if(step < 2 ){
-        this.$router.push({params: {step: `${newStep + 1}`}})
+      if(this.checkValue()){
+        return
+      }else {
+
+        let step = this.$route.params.step
+        let newStep = parseInt(step)
+        if(step < 4){
+          this.$router.push({params: {step: `${newStep + 1}`}})
+        }
       }
+
     }
   },
   mounted() {
